@@ -272,25 +272,24 @@ public class FullScreenViewActivity extends Activity implements OnClickListener 
 		if (bWidth == 0 || bHeight == 0)
 			return;
 
-		int sHeight = 0;
+		int sWidth = 0;
 
 		if (android.os.Build.VERSION.SDK_INT >= 13) {
 			Display display = getWindowManager().getDefaultDisplay();
 			Point size = new Point();
 			display.getSize(size);
-			sHeight = size.y;
+			sWidth = size.x;
 		} else {
 			Display display = getWindowManager().getDefaultDisplay();
-			sHeight = display.getHeight();
+			sWidth = display.getWidth();
 		}
 
-		int new_width = (int) Math.floor((double) bWidth * (double) sHeight
-				/ (double) bHeight);
-		params.width = new_width;
-		params.height = sHeight;
+		int new_height = (int) Math.floor((double)bHeight * (double)sWidth / (double)bWidth);
+		params.width = sWidth;
+		params.height = new_height;
 
-		Log.d(TAG, "Fullscreen image new dimensions: w = " + new_width
-				+ ", h = " + sHeight);
+		Log.d(TAG, "Fullscreen image new dimensions: w = " + sWidth
+				+ ", h = " + new_height);
 
 		fullImageView.setLayoutParams(params);
 	}
